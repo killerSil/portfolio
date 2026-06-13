@@ -1,265 +1,1080 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiala Game Studio | Portfolio</title>
+    <title>Kiala Game Studio • O Seu Parceiro de Desenvolvimento de Videogames</title>
     <style>
         :root {
-            --bg-dark: #0a0a0a;
-            --neon-green: #39ff14;
-            --neon-cyan: #00ffff;
-            --text-white: #ffffff;
-            --text-gray: #b0b0b0;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --cyan: #00d2ff;
+            --orange: #ff6b00;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(255, 255, 255, 0.25);
+            --yt-red: #ff0000;
+            --fb-blue: #1877f2;
         }
 
-        body {
-            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background: linear-gradient(180deg, #000000 0%, #1a1a1a 50%, #2c2c2c 100%);
-            background-attachment: fixed;
-            color: var(--text-white);
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antiali;
         }
 
-        /* Background Image with 50% Transparency */
-        body::before {
-            content: "";
+        /* ─── FUNDO E ESTRUTURA GERAL ─── */
+        body {
+            background: linear-gradient(135deg, #000000 0%, #262626 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .site-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('KialaGameStudio15.jpg') center center / cover no-repeat;
+            opacity: 0.5;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .site-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.65) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ─── NAVEGAÇÃO ─── */
+        header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background-image: url('uploads/KialaGameStudio15.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.5;
-            z-index: -1;
-            filter: grayscale(30%);
-            mix-blend-mode: overlay;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        header {
-            padding: 6rem 2rem;
+        .nav-container {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--orange), var(--cyan));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+            color: #111;
+        }
+
+        .brand-text-accent {
+            background: linear-gradient(135deg, #ffffff 30%, var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ─── HERO SECTION ─── */
+        .hero {
+            padding: 240px 24px 140px;
+            max-width: 1360px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 3.5rem;
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-hover);
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--cyan);
             text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--text-white);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.4);
+            letter-spacing: 1.5px;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        header p {
-            font-size: 1.2rem;
-            color: var(--neon-cyan);
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            max-width: 1100px;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            margin-bottom: 32px;
+            text-transform: uppercase;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--cyan), #00ffaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.lead {
+            font-size: 1.4rem;
+            color: #e2e8f0;
+            max-width: 850px;
+            font-weight: 400;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.8);
+        }
+
+        /* ─── SERVIÇOS MARQUEE (RIBBON G4G STYLE) ─── */
+        .services-ribbon {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 35px 0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 60px;
+            animation: scrollMarquee 40s linear infinite;
+            white-space: nowrap;
+            align-items: center;
+        }
+
+        .marquee-track span {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-top: 1rem;
-            font-weight: 300;
-            text-shadow: 0 0 5px var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: color 0.3s ease;
         }
 
-        .container {
-            max-width: 1100px;
+        .marquee-track span:hover {
+            color: var(--cyan);
+        }
+
+        .marquee-track span::after {
+            content: '✦';
+            color: var(--orange);
+            font-size: 1.2rem;
+            margin-left: 20px;
+        }
+
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ─── PRINCÍPIOS DA EMPRESA (G4G STYLE) ─── */
+        .principles {
+            padding: 140px 24px;
+            max-width: 1360px;
             margin: 0 auto;
-            padding: 0 2rem;
         }
 
-        section {
-            margin-bottom: 6rem;
-        }
-
-        h2 {
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            font-size: 2rem;
+            margin-bottom: 64px;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            max-width: 800px;
+            line-height: 1.15;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 3rem;
-            position: relative;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        h2::after {
-            content: "";
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
-            margin: 10px auto;
-            box-shadow: 0 0 10px var(--neon-green);
-        }
-
-        .grid {
+        .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
         }
 
-        /* Glassmorphism Card */
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
+        .principle-card {
+            background: rgba(15, 21, 35, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-hover);
+            border-left: 4px solid var(--cyan);
+            padding: 56px 40px;
             border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .principle-card:hover {
+            transform: translateY(-8px);
+            background: rgba(25, 35, 58, 0.85);
+            border-color: var(--cyan);
+            box-shadow: 0 25px 50px rgba(0, 210, 255, 0.2);
+        }
+
+        .principle-card h4 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .principle-card p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* ─── VÍDEOS EM JANELAS PEQUENAS ─── */
+        .video-showcase {
+            padding: 40px 24px 140px;
+            max-width: 1360px;
+            margin: 0 auto;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .video-window {
+            background: rgba(13, 18, 30, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-hover);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-window:hover {
+            transform: translateY(-6px);
+            border-color: var(--cyan);
+            box-shadow: 0 25px 60px rgba(0, 210, 255, 0.25);
+        }
+
+        .window-top-bar {
+            background: rgba(5, 7, 12, 0.95);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .window-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .w-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-r { background-color: #ff5f56; }
+        .dot-y { background-color: #ffbd2e; }
+        .dot-g { background-color: #27c93f; }
+
+        .video-player-wrapper {
             position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect */
+            height: 0;
+            background: #000000;
             overflow: hidden;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--neon-green);
-            box-shadow: 0 0 30px rgba(57, 255, 20, 0.2);
+        .video-player-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
         }
 
-        .card h3 {
-            margin-top: 0;
-            color: var(--neon-green);
-            font-size: 1.5rem;
+        .video-info {
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+        }
+
+        .video-info h4 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .video-info p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .btn-video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--cyan);
+            font-weight: 800;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-video-link:hover {
+            color: var(--orange);
+            gap: 14px;
+        }
+
+        /* ─── COMUNIDADE SOCIAL ─── */
+        .social-connection {
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 120px 24px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .social-connection-container {
+            max-width: 1360px;
+            margin: 0 auto;
+        }
+
+        .social-connection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .social-hero-card {
+            background: rgba(15, 21, 35, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid var(--border-hover);
+            border-radius: 24px;
+            padding: 64px 48px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+
+        .sh-fb { border-color: rgba(24, 119, 242, 0.4); }
+        .sh-yt { border-color: rgba(255, 0, 0, 0.4); }
+
+        .social-hero-card:hover {
+            transform: translateY(-8px);
+            background: rgba(25, 35, 58, 0.9);
+        }
+
+        .sh-fb:hover { border-color: var(--fb-blue); box-shadow: 0 25px 60px rgba(24, 119, 242, 0.3); }
+        .sh-yt:hover { border-color: var(--yt-red); box-shadow: 0 25px 60px rgba(255, 0, 0, 0.3); }
+
+        .sh-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .sh-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .sh-fb .sh-icon { background: linear-gradient(135deg, #5097ff, var(--fb-blue)); font-family:serif; font-weight:bold; }
+        .sh-yt .sh-icon { background: linear-gradient(135deg, #ff4a4a, var(--yt-red)); }
+
+        .sh-header h3 { font-size: 2.2rem; font-weight: 900; color: var(--text-main); }
+        .sh-header span.tag { font-size: 1rem; font-weight: 700; color: var(--text-muted); display: block; margin-top: 4px; }
+
+        .social-hero-card p.desc {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            margin-bottom: 56px;
+            line-height: 1.7;
+        }
+
+        .btn-sh-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 22px 40px;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
             letter-spacing: 1px;
+            width: 100%;
         }
 
-        .card p {
-            color: var(--text-gray);
+        .btn-sh-fb { background-color: var(--fb-blue); box-shadow: 0 10px 30px rgba(24, 119, 242, 0.4); }
+        .btn-sh-fb:hover { background-color: #0e65d8; box-shadow: 0 15px 40px rgba(24, 119, 242, 0.6); transform: scale(1.02); }
+
+        .btn-sh-yt { background-color: var(--yt-red); box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4); }
+        .btn-sh-yt:hover { background-color: #d60000; box-shadow: 0 15px 40px rgba(255, 0, 0, 0.6); transform: scale(1.02); }
+
+        /* ─── CONTATOS E ATENDIMENTO (SÓ ÍCONES COM JANELINHA POPUP MODAL) ─── */
+        .contacts {
+            padding: 100px 24px 80px;
+            max-width: 1360px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-icons-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .btn-contact-icon-only {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: 2px solid var(--border-hover);
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
+
+        .email-icon-only { color: var(--orange); border-color: rgba(255, 107, 0, 0.4); }
+        .email-icon-only:hover { background-color: var(--orange); color: #ffffff; box-shadow: 0 12px 40px rgba(255, 107, 0, 0.6); transform: scale(1.12); }
+
+        .wa-icon-only { color: #25d366; border-color: rgba(37, 211, 102, 0.4); }
+        .wa-icon-only:hover { background-color: #25d366; color: #ffffff; box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6); transform: scale(1.12); }
+
+        /* Contêiner de posicionamento da janelinha modal de email */
+        .email-modal-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Janelinha Modal de E-mail */
+        .email-modal {
+            position: absolute;
+            bottom: 96px; /* Posicionada rigorosamente em cima do ícone */
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            width: 380px;
+            background: rgba(13, 18, 30, 0.95);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--cyan);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: left;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0, 210, 255, 0.25);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+        }
+
+        .email-modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Pequena ponta de seta apontando para baixo para o ícone de e-mail */
+        .email-modal::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: rgba(13, 18, 30, 0.95) transparent;
+            display: block;
+            width: 0;
+        }
+
+        .em-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .em-header h4 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-em-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.6rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            line-height: 1;
+        }
+
+        .btn-em-close:hover {
+            color: #ff4a4a;
+        }
+
+        .em-form-group {
+            margin-bottom: 16px;
+        }
+
+        .em-form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .em-form-group input,
+        .em-form-group textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-hover);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .em-form-group input:focus,
+        .em-form-group textarea:focus {
+            border-color: var(--orange);
+        }
+
+        .em-form-group textarea {
+            resize: none;
+            height: 110px;
+        }
+
+        .btn-em-send {
+            background: linear-gradient(135deg, #ff9900, var(--orange));
+            color: #ffffff;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .btn-em-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(255, 107, 0, 0.6);
+        }
+
+        /* ─── SIGA-NOS NO RODAPÉ (SÓ ÍCONES) ─── */
+        .follow-us-strip {
+            padding: 60px 24px;
+            max-width: 1360px;
+            margin: 0 auto;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .follow-us-strip h4 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .social-icons-bottom {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .btn-bottom-icon-only {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: 2px solid var(--border-hover);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .fb-icon-only { color: #5097ff; border-color: rgba(24, 119, 242, 0.4); }
+        .fb-icon-only:hover { background-color: var(--fb-blue); color: #ffffff; box-shadow: 0 10px 30px rgba(24, 119, 242, 0.6); transform: scale(1.1); }
+
+        .yt-icon-only { color: #ff4a4a; border-color: rgba(255, 0, 0, 0.4); }
+        .yt-icon-only:hover { background-color: var(--yt-red); color: #ffffff; box-shadow: 0 10px 30px rgba(255, 0, 0, 0.6); transform: scale(1.1); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: #000000;
+            padding: 40px 24px 60px;
+            text-align: center;
+        }
+
+        .footer-bottom {
+            max-width: 1360px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 36px;
+            color: rgba(255, 255, 255, 0.4);
             font-size: 1rem;
         }
 
-        .card strong {
-            color: var(--text-white);
-            display: block;
-            margin-top: 1rem;
-        }
-
-        .card a {
-            display: inline-block;
-            margin-top: 1.5rem;
-            color: var(--neon-cyan);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        .card a:hover {
-            color: var(--text-white);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        .contact-box {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            padding: 4rem 2rem;
-            text-align: center;
-            border-radius: 30px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
-        }
-
-        .contact-box p {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-        }
-
-        .email-link {
-            color: var(--text-white);
-            text-decoration: none;
-            font-size: 1.8rem;
-            font-weight: bold;
-            position: relative;
-            transition: 0.3s;
-            display: inline-block;
-        }
-
-        .email-link:hover {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 15px var(--neon-cyan);
-        }
-
-        footer {
-            text-align: center;
-            padding: 4rem 2rem;
-            font-size: 0.8rem;
-            color: var(--text-gray);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.25rem; }
+            .section-title { font-size: 2.5rem; }
+            .email-modal { width: 310px; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Kiala Game Studio</h1>
-        <p>Unity Tool Developer & 3D Pipeline Specialist</p>
-    </header>
+    <!-- ─── FUNDO FIXO DO SITE (FOTO 50% + DEGRADÉ) ─── -->
+    <div class="site-background"></div>
+    <div class="site-overlay"></div>
 
-    <div class="container">
-        
-        <section id="work">
-            <h2>Work Samples</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>BlenderToUnity V1.2.0</h3>
-                    <p>A professional bridge designed to streamline the asset pipeline between Blender and Unity. Solves common issues with scale, rotation, and material mapping.</p>
-                    <strong>Key Feature:</strong> Real-time asset iteration.
-                    <a href="https://github.com/killerSil" target="_blank">View Source &rarr;</a>
-                </div>
-                
-                <div class="card">
-                    <h3>Pipeline Optimization</h3>
-                    <p>Development of custom scripts to automate repetitive tasks within the Unity Editor, reducing manual setup time for 3D environments.</p>
-                    <strong>Key Feature:</strong> Workflow automation.
-                    <a href="https://github.com/killerSil" target="_blank">View Profile &rarr;</a>
-                </div>
+    <!-- ─── WRAPPER CENTRAL DO CONTEÚDO ─── -->
+    <div class="content-wrapper">
 
-                <div class="card">
-                    <h3>Asset Integration</h3>
-                    <p>Specialized in ensuring technical consistency between DCC tools and game engines, maintaining UV integrity and vertex data.</p>
-                    <strong>Key Feature:</strong> Technical Art.
-                    <a href="https://github.com/killerSil" target="_blank">View Portfolio &rarr;</a>
+        <!-- ─── HEADER (BARRA LIMPA SEM REDES SOCIAIS NA PARTE DE CIMA) ─── -->
+        <header>
+            <div class="nav-container">
+                <a href="#" class="brand">
+                    <div class="brand-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                        </svg>
+                    </div>
+                    <span>Kiala Game <span class="brand-text-accent">Studio</span></span>
+                </a>
+
+                <nav class="nav-links">
+                    <a href="#principles">Princípios</a>
+                    <a href="#videos">Vídeos</a>
+                    <a href="#community">Comunidade</a>
+                    <a href="#contacts">Contatos</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ─── HERO SECTION ─── -->
+        <section class="hero">
+            <div class="hero-tag">✦ Seu Parceiro de Desenvolvimento de Videogames</div>
+            <h1>Construindo o Universo <br><span>dos Jogos de Alta Qualidade</span></h1>
+            <p class="lead">Bem-vindo à <strong>Kiala Game Studio</strong>, um estúdio de desenvolvimento jogo.</p>
+        </section>
+
+        <!-- ─── SERVIÇOS MARQUEE (RIBBON G4G STYLE) ─── -->
+        <div class="services-ribbon">
+            <div class="marquee-track">
+                <span>Desenvolvimento de Jogos</span>
+                <span>Arte Conceitual</span>
+                <span>Otimização 2D / 3D</span>
+                <span>Sistemas Modulares Flexíveis</span>
+                <span>Integração Cliente / Servidor</span>
+                <span>LiveOps e Publicação</span>
+                <span>Sistemas PBR & Shaders</span>
+                <span>Desenvolvimento de Jogos</span>
+                <span>Arte Conceitual</span>
+                <span>Otimização 2D / 3D</span>
+                <span>Sistemas Modulares Flexíveis</span>
+                <span>Integração Cliente / Servidor</span>
+                <span>LiveOps e Publicação</span>
+                <span>Sistemas PBR & Shaders</span>
+            </div>
+        </div>
+
+        <!-- ─── PRINCÍPIOS DA EMPRESA (G4G STYLE) ─── -->
+        <section id="principles" class="principles">
+            <div class="section-header">
+                <h2 class="section-title">Princípios da Nossa Empresa</h2>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h4>Somos Parceiros</h4>
+                    <p>Um projeto de desenvolvimento de jogos bem-sucedido só pode ser construído em conjunto. Trabalhamos lado a lado com os nossos clientes para dar vida a cada ideia com precisão e inovação.</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Soluções Modulares</h4>
+                    <p>Aproveitamos módulos, ativos e sistemas proprietários flexíveis que aceleram a produção, reduzem custos e melhoram a eficiência geral do projeto sem comprometer a qualidade visual.</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Nós Amamos Jogos</h4>
+                    <p>A nossa paixão profunda e genuína por jogos impulsiona-nos a construir experiências imersivas e inesquecíveis de ciclo completo, mantendo sempre a satisfação dos jogadores em primeiro lugar.</p>
                 </div>
             </div>
         </section>
 
-        <section id="contact">
-            <div class="contact-box">
-                <h2>Contact Details</h2>
-                <p>For business inquiries, support, or collaborations:</p>
-                <!-- The email is hidden from bots and rendered via JS -->
-                <a href="#" id="email-link" class="email-link">Loading email...</a>
+        <!-- ─── SECÇÃO DE VÍDEOS EM JANELAS PEQUENAS (SCI-FI UI WINDOWS) ─── -->
+        <section id="videos" class="video-showcase">
+            <div class="section-header">
+                <h2 class="section-title">Showcase & Devlogs</h2>
+                <p style="color:var(--text-muted); font-size:1.15rem; max-width:650px; margin-top:16px;">Assista aos nossos trailers de jogos, vídeos passo-a-passo de modelação 3D otimizada e devlogs explicativos em players embutidos diretamente aqui na página.</p>
+            </div>
+
+            <div class="video-grid">
+                <!-- JANELA DE VÍDEO 01 (ÚNICA EXIBIDA) -->
+                <div class="video-window">
+                    <div class="window-top-bar">
+                        <div class="window-dots">
+                            <span class="w-dot dot-r"></span>
+                            <span class="w-dot dot-y"></span>
+                            <span class="w-dot dot-g"></span>
+                        </div>
+                        <span>Devlog #01 • Blender To Unity Bridge</span>
+                    </div>
+                    <div class="video-player-wrapper">
+                        <!-- Janela de Player do YouTube com o seu link real do Devlog #01 -->
+                        <iframe src="https://www.youtube.com/embed/6oqZJKn3_xA?autoplay=0&controls=1" title="Devlog #01 • Blender To Unity Bridge" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div>
+                            <h4>Ponte de Sincronização Live Sync</h4>
+                            <p>Demonstração em tempo real da nossa tecnologia modular transmitindo malhas densas e materiais PBR instantaneamente.</p>
+                        </div>
+                        <a href="https://www.youtube.com/@KialaGameStudio3.8" target="_blank" rel="noopener" class="btn-video-link">
+                            <span>Assistir Canal Oficial</span>
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <!-- ─── COMUNIDADE SOCIAL ─── -->
+        <section id="community" class="social-connection">
+            <div class="social-connection-container">
+                <div class="section-header">
+                    <h2 class="section-title">Conecte-se à Comunidade</h2>
+                </div>
+
+                <div class="social-connection-grid">
+                    <!-- 🟦 CARD FACEBOOK EM PRIMEIRO -->
+                    <div class="social-hero-card sh-fb">
+                        <div>
+                            <div class="sh-header">
+                                <div class="sh-icon">f</div>
+                                <div>
+                                    <h3>Página do Facebook</h3>
+                                    <span class="tag">/KialaGameStudio</span>
+                                </div>
+                            </div>
+                            <p class="desc">Siga a nossa página oficial para interagir diretamente com a equipa de programadores e artistas, acompanhar bastidores de produção, debates e novidades instantâneas da Kiala Game Studio.</p>
+                        </div>
+                        <a href="https://www.facebook.com/KialaGameStudio" target="_blank" rel="noopener" class="btn-sh-action btn-sh-fb">
+                            <span>Acessar /KialaGameStudio</span>
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                        </a>
+                    </div>
+
+                    <!-- 🟥 CARD YOUTUBE EM SEGUNDO -->
+                    <div class="social-hero-card sh-yt">
+                        <div>
+                            <div class="sh-header">
+                                <div class="sh-icon">▶</div>
+                                <div>
+                                    <h3>Canal do YouTube</h3>
+                                    <span class="tag">@KialaGameStudio3.8</span>
+                                </div>
+                            </div>
+                            <p class="desc">Inscreva-se no nosso canal oficial para assistir a devlogs exclusivos, vídeos passo-a-passo de modelação 3D, programação de shaders e making-of dos nossos projetos de jogos.</p>
+                        </div>
+                        <a href="https://www.youtube.com/@KialaGameStudio3.8" target="_blank" rel="noopener" class="btn-sh-action btn-sh-yt">
+                            <span>Acessar @KialaGameStudio3.8</span>
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── CONTATOS E ATENDIMENTO (SÓ ÍCONES COM JANELINHA POPUP MODAL) ─── -->
+        <section id="contacts" class="contacts">
+            <div class="section-header" style="margin-bottom:40px;">
+                <h2 class="section-title">Contatos / Atendimento</h2>
+                <p style="color:var(--text-muted); font-size:1.15rem; max-width:650px; margin-top:16px;">Tem uma proposta comercial, projeto em mente ou precisa de suporte técnico? Clique nos ícones abaixo para falar diretamente com a nossa equipa.</p>
+            </div>
+
+            <div class="contact-icons-grid">
+                <!-- ✉️ SÓ ÍCONE DE EMAIL COM POPUP MODAL EMBUTIDO -->
+                <div class="email-modal-wrapper">
+                    <!-- Botão que abre a janelinha modal de email -->
+                    <a href="#" id="btn-open-email-modal" class="btn-contact-icon-only email-icon-only" title="Clique para enviar um E-mail (kialagamestudio@gmail.com)">
+                        <svg width="34" height="34" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </a>
+
+                    <!-- JANELINHA INTERATIVA POPUP -->
+                    <div id="email-modal-window" class="email-modal">
+                        <div class="em-header">
+                            <h4><span>✉️</span> Enviar E-mail</h4>
+                            <button id="btn-close-email-modal" class="btn-em-close" title="Fechar Janela">×</button>
+                        </div>
+                        <div class="em-form-group">
+                            <label for="em-sub">Assunto:</label>
+                            <input type="text" id="em-sub" placeholder="Ex: Cotação de Desenvolvimento" required>
+                        </div>
+                        <div class="em-form-group">
+                            <label for="em-msg">Descrição:</label>
+                            <textarea id="em-msg" placeholder="Escreva a sua mensagem detalhada aqui..." required></textarea>
+                        </div>
+                        <button id="btn-send-email" class="btn-em-send" title="Enviar Mensagem para kialagamestudio@gmail.com">
+                            <span>Enviar</span>
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 💬 SÓ ÍCONE DE WHATSAPP (`+244 950 939 097`) -->
+                <a href="https://wa.me/244950939097" target="_blank" rel="noopener" class="btn-contact-icon-only wa-icon-only" title="Iniciar Conversa no WhatsApp (+244 950 939 097)">
+                    <svg width="34" height="34" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.405-.883-.733-1.479-1.636-1.653-1.934-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.579-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- ─── SIGA-NOS NO RODAPÉ (SÓ ÍCONES) ─── -->
+        <section class="follow-us-strip">
+            <h4>Siga-nos:</h4>
+            <div class="social-icons-bottom">
+                <!-- 🔗 FACEBOOK PRIMEIRO / SÓ ÍCONE -->
+                <a href="https://www.facebook.com/KialaGameStudio" target="_blank" rel="noopener" class="btn-bottom-icon-only fb-icon-only" title="Seguir no Facebook">
+                    <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+
+                <!-- 🔗 YOUTUBE SEGUNDO / SÓ ÍCONE -->
+                <a href="https://www.youtube.com/@KialaGameStudio3.8" target="_blank" rel="noopener" class="btn-bottom-icon-only yt-icon-only" title="Inscrever-se no YouTube">
+                    <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- ─── FOOTER ─── -->
+        <footer>
+            <div class="footer-bottom">
+                <span>© 2026 Kiala Game Studio. Feito com paixão por jogos.</span>
+            </div>
+        </footer>
 
     </div>
 
-    <footer>
-        &copy; 2026 Kiala Game Studio. Engineered for the Future.
-    </footer>
-
+    <!-- ─── JAVASCRIPT PARA INTERATIVIDADE POPUP ─── -->
     <script>
-        (function() {
-            // We split the email to prevent automatic obfuscation [email protected]
-            const user = "kialagamestudio";
-            const domain = "gmail.com";
-            const fullEmail = user + "@" + domain;
-            
-            const emailElement = document.getElementById('email-link');
-            emailElement.innerText = fullEmail;
-            emailElement.href = "mailto:" + fullEmail;
-        })();
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnOpen = document.getElementById('btn-open-email-modal');
+            const btnClose = document.getElementById('btn-close-email-modal');
+            const modal = document.getElementById('email-modal-window');
+            const btnSend = document.getElementById('btn-send-email');
+            const inputSub = document.getElementById('em-sub');
+            const inputMsg = document.getElementById('em-msg');
+
+            // Abrir / Alternar a Janelinha Modal
+            btnOpen.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.toggle('active');
+            });
+
+            // Fechar no botão ×
+            btnClose.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            // Fechar ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!btnOpen.contains(e.target) && !modal.contains(e.target)) {
+                    modal.classList.remove('active');
+                }
+            });
+
+            // Lógica de envio dinâmico do e-mail
+            btnSend.addEventListener('click', () => {
+                const subVal = inputSub.value.trim();
+                const msgVal = inputMsg.value.trim();
+
+                if (!subVal || !msgVal) {
+                    alert('Por favor, preencha o Assunto e a Descrição da mensagem antes de enviar.');
+                    return;
+                }
+
+                // Constroi o link mailto com os parâmetros codificados para o e-mail comercial
+                const mailtoUrl = `mailto:kialagamestudio@gmail.com?subject=${encodeURIComponent(subVal)}&body=${encodeURIComponent(msgVal)}`;
+                window.location.href = mailtoUrl;
+                
+                // Limpa e fecha a modal
+                inputSub.value = '';
+                inputMsg.value = '';
+                modal.classList.remove('active');
+            });
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0b0ab5e7f86304a',t:'MTc4MTM0OTI0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0b2ca0cca91304a',t:'MTc4MTM3MTQ3MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
